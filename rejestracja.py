@@ -26,7 +26,7 @@
 # (Konto zostalo zalozone)
 
 # Gra do nauki XPATCH - https://topswagcode.com/xpath/
-# Dokument pisany przez prowadzcego: http://www.wklejto.pl/txt801718, http://www.wklejto.pl/801718
+# Dokument pisany przez prowadzcego: http://www.wklejto.pl/txt801730, http://www.wklejto.pl/801730
 
 import unittest
 import time
