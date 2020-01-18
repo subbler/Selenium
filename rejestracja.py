@@ -25,14 +25,23 @@
 # Brak insormacji o bledach
 # (Konto zostalo zalozone)
 
+# Gra do nauki XPATCH - https://topswagcode.com/xpath/
+
 import unittest
 import time
 
 from selenium import webdriver
 import time
+from selenium.webdriver.support.ui import Select
 
 email= 'tester@wsb.pl'
 gender= 'male'
+firstname= 'Blazej'
+lastname= 'Anu'
+password= '123@abc#'
+birth_day= '2'
+birth_month= 'January'
+birth_year= '2000'
 
 class APRregistration(unittest.TestCase):
 
@@ -44,11 +53,10 @@ class APRregistration(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-# testu
 
     def testCorrectRegestration(self):
         driver = self.driver
-        signin = driver.find_element_by_class_name("login")
+        signin = driver.find_element_by_class_name('login')
         signin.click()
 
         email_input = driver.find_element_by_id('email_create')
@@ -62,7 +70,32 @@ class APRregistration(unittest.TestCase):
         if gender == 'female':
             driver.find_element_by_id('id_gender2').click()
 
+        firstname_input = driver.find_element_by_id('customer_firstname')
+        firstname_input.send_keys(firstname)
+
+        lastname_input = driver.find_element_by_id('customer_lastname')
+        lastname_input.send_keys(lastname)
+
+# Sprawdzanie poprawnosci emaila
+        email_fact = driver.find_element_by_id('email').get_attribute('value')
+        print (email_fact)
+        assert email_fact == email
+
+        password_input = driver.find_element_by_id('passwd')
+        password_input.send_keys(password)
+
+# 9. Wpisz date urodzenia
+        day = Select(driver.find_element_by_id('days'))
+        day.select_by_value(birth_day)
+        month = Select(driver.find_element_by_id('months'))
+        month.select_by_visible_text(birth_month)
+        year = Select(driver.find_element_by_id('years'))
+        year.select_by_value(birth_year)
+
         time.sleep(3)
+
+#10 wybieranie poprzez XPATCH
+        driver.find_element_by_xpatch('//input[@id='firstname']')
 
 if __name__== "__main__":
     unittest.main()
