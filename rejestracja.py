@@ -26,6 +26,7 @@
 # (Konto zostalo zalozone)
 
 # Gra do nauki XPATCH - https://topswagcode.com/xpath/
+# Dokument pisany przez prowadzcego: http://www.wklejto.pl/txt801718, http://www.wklejto.pl/801718
 
 import unittest
 import time
@@ -88,14 +89,20 @@ class APRregistration(unittest.TestCase):
         day = Select(driver.find_element_by_id('days'))
         day.select_by_value(birth_day)
         month = Select(driver.find_element_by_id('months'))
-        month.select_by_visible_text(birth_month)
+        month.select_by_value('1')
         year = Select(driver.find_element_by_id('years'))
         year.select_by_value(birth_year)
 
-        time.sleep(3)
+#10 wybieranie poprzez XPATH /sprawdzenie poprawnosci
+        name_fact = driver.find_element_by_xpath('//input[@id="customer_firstname"]').get_attribute('value')
+        print ("W polu jest imie:", name_fact)
+        assert firstname == name_fact
+ #przewija strone do danego pola
+        #name_fact.location_once_scrolled_into_view
 
-#10 wybieranie poprzez XPATCH
-        driver.find_element_by_xpatch('//input[@id='firstname']')
+        surname_fact = driver.find_element_by_xpath('//input[@id="customer_lastname"]').get_attribute('value')
+        print ("W polu jest nazwisko:", surname_fact)
+        assert lastname == surname_fact
 
 if __name__== "__main__":
-    unittest.main()
+    unittest.main(verbosity=2)
