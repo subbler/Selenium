@@ -44,6 +44,7 @@ class APRregistration(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
+# testu
 
     def testCorrectRegestration(self):
         driver = self.driver
